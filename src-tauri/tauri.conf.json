@@ -1,0 +1,124 @@
+{
+	"$schema": "../node_modules/@tauri-apps/cli/schema.json",
+	"build": {
+		"beforeBuildCommand": "pnpm run build",
+		"beforeDevCommand": "pnpm run dev",
+		"devPath": "http://localhost:5173",
+		"distDir": "../build"
+	},
+	"package": {
+		"productName": "checker",
+		"version": "0.1.0"
+	},
+	"tauri": {
+		"cli": {
+			"args": [
+				{
+					"name": "folder",
+					"index": 1,
+					"takesValue": true
+				}
+			]
+		},
+		"allowlist": {
+			"all": false,
+			"http": {
+				"all": true,
+				"request": true,
+				"scope": ["http:192.168.1.217:5002/*"]
+			},
+			"dialog": {
+				"all": false,
+				"ask": false,
+				"confirm": false,
+				"message": true,
+				"open": true,
+				"save": false
+			},
+			"window": {
+				"all": false,
+				"center": false,
+				"close": true,
+				"create": false,
+				"hide": false,
+				"maximize": false,
+				"minimize": false,
+				"print": false,
+				"requestUserAttention": false,
+				"setAlwaysOnTop": false,
+				"setContentProtected": false,
+				"setCursorGrab": false,
+				"setCursorIcon": false,
+				"setCursorPosition": false,
+				"setCursorVisible": false,
+				"setDecorations": false,
+				"setFocus": false,
+				"setFullscreen": false,
+				"setIcon": false,
+				"setIgnoreCursorEvents": false,
+				"setMaxSize": false,
+				"setMinSize": false,
+				"setPosition": false,
+				"setResizable": false,
+				"setSize": false,
+				"setSkipTaskbar": false,
+				"setTitle": false,
+				"show": false,
+				"startDragging": false,
+				"unmaximize": false,
+				"unminimize": false
+			}
+		},
+		"bundle": {
+			"active": true,
+			"category": "DeveloperTool",
+			"copyright": "",
+			"deb": {
+				"depends": []
+			},
+			"externalBin": [],
+			"icon": ["icons/icon.ico"],
+			"identifier": "changer",
+			"longDescription": "",
+			"macOS": {
+				"entitlements": null,
+				"exceptionDomain": "",
+				"frameworks": [],
+				"providerShortName": null,
+				"signingIdentity": null
+			},
+			"resources": [],
+			"shortDescription": "",
+			"targets": "all",
+			"windows": {
+				"certificateThumbprint": null,
+				"digestAlgorithm": "sha256",
+				"timestampUrl": ""
+			}
+		},
+		"security": {
+			"csp": "default-src blob: data: filesystem: ws: wss: http: https: tauri: 'unsafe-eval' 'unsafe-inline' 'self' img-src: 'self'"
+		},
+		"updater": {
+			"active": true,
+			"endpoints": [
+				"https://gist.githubusercontent.com/jacekschefler/07dbb39f6b35c6e85bcdf0da117585f1/raw/4d9fdc19b764f9f96a64eb830e3ac0fbc5060c24/updater.json"
+			],
+			"dialog": true,
+			"pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDU4Rjk2QzMxRTBGRDBENTUKUldSVkRmM2dNV3o1V0swZGZaeDJBcU1nWUFzOTI3ZHBPRXF0WUt3aXQydmdqejJmQVV5TnoxbmwK",
+			"windows": {
+				"installMode": "passive"
+			}
+		},
+		"windows": [
+			{
+				"fullscreen": false,
+				"height": 380,
+				"resizable": false,
+				"title": "Podmienianie nazw",
+				"width": 400,
+				"alwaysOnTop": true
+			}
+		]
+	}
+}
