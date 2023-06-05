@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { getClient, ResponseType, Response } from '@tauri-apps/api/http';
 	import { getMatches } from '@tauri-apps/api/cli';
-	import { open } from '@tauri-apps/api/dialog';
+	import { open, message } from '@tauri-apps/api/dialog';
 	import { appWindow } from '@tauri-apps/api/window';
 	import { invoke } from '@tauri-apps/api/tauri';
 	import { onMount } from 'svelte';
 	let selectOptions: string[] = [];
-	let folder: string | undefined = undefined;
+	let folder: string | undefined = '';
 	let text1: string = '';
 	let text2: string = '';
 	let checked = false;
@@ -39,14 +39,19 @@
 					directory: true,
 					multiple: false
 				});
-				console.log(selected);
 				if (selected === null) {
 					await appWindow.close();
 				} else if (Array.isArray(selected)) {
-					folder = trimChar(selected[1], '"');
+					folder = selected[1];
 				} else {
-					folder = trimChar(selected, '"');
+					folder = selected;
 				}
+			}
+			if (folder === undefined) {
+				await message('Błąd nazwy folderu', { type: 'error' });
+				await appWindow.close();
+			} else {
+				folder = trimChar(folder, '"');
 			}
 		} catch (e) {
 			console.log(e);
@@ -74,8 +79,11 @@
 				addNumbers: checked
 			});
 			await appWindow.close();
-		} catch (err) {
-			console.error(err);
+		} catch (error) {
+			let msg;
+			if (error instanceof Error) msg = error.message;
+			else msg = String(error);
+			await message(msg, { type: 'error' });
 		}
 	}
 </script>

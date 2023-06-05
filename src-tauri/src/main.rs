@@ -1,7 +1,7 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
-use regex::Regex;
+use regex::{Captures, Regex};
 use std::{
     borrow::Borrow,
     fs::rename,
@@ -47,9 +47,7 @@ async fn change_names(
         let tmp_name = normalize(re_to_remove.replace(name, "").borrow());
         let tmp_number = re_numbers
             .captures(name)
-            .ok_or(String::from("Nie znaleziono"))?
-            .get(1)
-            .map_or("", |m| m.as_str());
+            .map_or("", |c| c.get(1).map_or("", |m| m.as_str()));
         let new_name = match (add_numbers, comment_normalized.len() > 0) {
             (true, true) => format!(
                 "{:0>2}-{} {}.{}",
