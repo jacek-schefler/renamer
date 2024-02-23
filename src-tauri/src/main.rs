@@ -1,7 +1,7 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
-use regex::{Captures, Regex};
+use regex::Regex;
 use std::{
     borrow::Borrow,
     fs::rename,
@@ -11,14 +11,9 @@ use std::{
 
 fn main() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![greet, change_names])
+        .invoke_handler(tauri::generate_handler![change_names])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
-}
-
-#[tauri::command]
-fn greet(name: &str) -> String {
-    format!("Hello, {}", name)
 }
 
 #[tauri::command]
@@ -31,7 +26,7 @@ async fn change_names(
     let comment_normalized = normalize_comment(&comment, &errand);
     let gcode_files = find_gcode_files(&folder).map_err(|err| err.to_string())?;
     let re_to_remove = Regex::new(r".*]\s?").map_err(|err| err.to_string())?;
-    let re_numbers = Regex::new(r".*toolpath(\d+)").map_err(|err| err.to_string())?;
+    let re_numbers = Regex::new(r"(?i).*toolpath(\d+)").map_err(|err| err.to_string())?;
     for mut file in gcode_files {
         let old_file_name = file.clone();
         let name = file
@@ -64,17 +59,13 @@ async fn change_names(
 }
 
 fn normalize_comment(comment: &str, errand: &str) -> String {
-    if comment.len() > 0 {
-        let mut tmp = comment
-            .chars()
-            .filter(|c| c.is_ascii_alphanumeric() || c == &' ')
-            .collect::<String>()
-            .to_uppercase();
-        tmp.truncate(20);
-        tmp
-    } else {
-        String::from(errand)
-    }
+    let mut tmp = comment
+        .chars()
+        .filter(|c| c.is_ascii_alphanumeric() || c == &' ')
+        .collect::<String>()
+        .to_uppercase();
+    tmp.truncate(20);
+    format!("{}{}", errand, tmp)
 }
 
 fn normalize(name: &str) -> String {

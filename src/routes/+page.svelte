@@ -89,17 +89,14 @@
 </script>
 
 <form>
-	<!-- Grid -->
 	<div class="grid">
-		<!-- Markup example 1: input is inside label -->
 		<label for="text1">
-			Wpisz komentarz/numer zamówienia
-			<input type="text" name="text1" placeholder="..." bind:value={text1} />
+			Wpisz komentarz lub numer zamówienia
+			<input type="text" name="text1" placeholder="..." bind:value={text1} maxlength="20" />
 		</label>
 
 		<label for="text2">
 			Lub wybierz z listy zamówień
-			<!-- Select -->
 			<select bind:value={text2}>
 				<option value="" selected>Wybierz</option>
 				{#each selectOptions as optionValue}

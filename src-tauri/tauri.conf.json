@@ -8,7 +8,7 @@
 	},
 	"package": {
 		"productName": "checker",
-		"version": "0.1.1"
+		"version": "0.1.4"
 	},
 	"tauri": {
 		"cli": {
@@ -102,7 +102,7 @@
 		"updater": {
 			"active": true,
 			"endpoints": [
-				"https://gist.githubusercontent.com/jacekschefler/07dbb39f6b35c6e85bcdf0da117585f1/raw/4d9fdc19b764f9f96a64eb830e3ac0fbc5060c24/updater.json"
+				"https://gist.githubusercontent.com/jacek-schefler/7492ec8b793230c216a18b54e86968ee"
 			],
 			"dialog": true,
 			"pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDU4Rjk2QzMxRTBGRDBENTUKUldSVkRmM2dNV3o1V0swZGZaeDJBcU1nWUFzOTI3ZHBPRXF0WUt3aXQydmdqejJmQVV5TnoxbmwK",
