@@ -64,7 +64,7 @@ fn normalize_comment(comment: &str, errand: &str) -> String {
         .filter(|c| c.is_ascii_alphanumeric() || c == &' ')
         .collect::<String>()
         .to_uppercase();
-    tmp.truncate(20);
+    tmp.truncate(40);
     format!("{}{}", errand, tmp)
 }
 
